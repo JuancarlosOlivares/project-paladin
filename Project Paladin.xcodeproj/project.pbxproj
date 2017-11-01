@@ -7,20 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		224681371FA94D9D00B8EF7F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 224681361FA94D9D00B8EF7F /* Launch Screen.storyboard */; };
 		6A74D68F1F843F23006A8F09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74D68E1F843F23006A8F09 /* AppDelegate.swift */; };
 		6A74D6911F843F23006A8F09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74D6901F843F23006A8F09 /* ViewController.swift */; };
 		6A74D6941F843F23006A8F09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6921F843F23006A8F09 /* Main.storyboard */; };
 		6A74D6961F843F23006A8F09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6951F843F23006A8F09 /* Assets.xcassets */; };
-		6A74D6991F843F23006A8F09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		224681361FA94D9D00B8EF7F /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		6A74D68B1F843F23006A8F09 /* Project Paladin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Paladin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A74D68E1F843F23006A8F09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6A74D6901F843F23006A8F09 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6A74D6931F843F23006A8F09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6A74D6951F843F23006A8F09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6A74D6981F843F23006A8F09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A74D69A1F843F23006A8F09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,9 +56,9 @@
 			children = (
 				6A74D68E1F843F23006A8F09 /* AppDelegate.swift */,
 				6A74D6901F843F23006A8F09 /* ViewController.swift */,
+				224681361FA94D9D00B8EF7F /* Launch Screen.storyboard */,
 				6A74D6921F843F23006A8F09 /* Main.storyboard */,
 				6A74D6951F843F23006A8F09 /* Assets.xcassets */,
-				6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */,
 				6A74D69A1F843F23006A8F09 /* Info.plist */,
 			);
 			path = "Project Paladin";
@@ -123,7 +123,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6A74D6991F843F23006A8F09 /* LaunchScreen.storyboard in Resources */,
+				224681371FA94D9D00B8EF7F /* Launch Screen.storyboard in Resources */,
 				6A74D6961F843F23006A8F09 /* Assets.xcassets in Resources */,
 				6A74D6941F843F23006A8F09 /* Main.storyboard in Resources */,
 			);
@@ -150,14 +150,6 @@
 				6A74D6931F843F23006A8F09 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6A74D6981F843F23006A8F09 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
