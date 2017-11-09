@@ -35,6 +35,7 @@ class ViewController: UIViewController {
         defcon = 2
         shield.image = UIImage(named:"alert")
         status.text = "alert"
+        createAlert(title: "ALERT", message: "You may have left your loved one in your vehicle!")
     }
     
     @IBOutlet weak var loLabel: UILabel!
@@ -77,7 +78,17 @@ class ViewController: UIViewController {
             print("Invalid DEFCON state.")
         }
     }
-  
+    
+    func createAlert (title:String, message:String)
+    {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,
+                                      handler: {(action) in alert.dismiss(animated: true, completion: nil)}))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
