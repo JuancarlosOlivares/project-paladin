@@ -8,13 +8,9 @@
 
 import Foundation
 
-class Sensor/*: AppDelegate*/{
-   
-    
-    //private var alert:Bool
+class Sensor {
     var thresh:Float
     var dist:Float
-    //var slider = Slider()
     
     init() {
         dist = 0
@@ -26,37 +22,7 @@ class Sensor/*: AppDelegate*/{
         self.thresh = thresh
     }
     
-    func isNear()-> Bool{
+    func isNear() -> Bool{
         return dist <= thresh
     }
-    
-    
-    
-    //func getMaxDistance()->Float{
-    //    return thresh
-    //}
-    
-   // func update(){
-   //     dist = slider.val
-   // }
-    
 }
-
-
-
-
- //private var minDistance:Double = 0
-
-//}
-
-
-
-
-//add bottom implementation in CareTaker
-// private var range:Bool = false
-
-
-//@override
-//func isInRange()->Bool{
-//    return range
-
