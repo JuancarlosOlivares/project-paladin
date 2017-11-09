@@ -14,24 +14,25 @@ class ViewController: UIViewController {
     
     var vu:Sensor = Sensor(thresh:VU_THRESH)
     var lo:Sensor = Sensor(thresh:LO_THRESH)
-    var armed:Bool = false
+    var defcon:Int = 0
     
     @IBOutlet weak var shield: UIImageView!
     @IBOutlet var status: UILabel!
     
     func disarm() {
-        armed = false
+        defcon = 0
         shield.image = UIImage(named:"unarmed")
         status.text = "unarmed"
     }
     
     func arm() {
-        armed = true
+        defcon = 1
         shield.image = UIImage(named:"armed")
         status.text = "armed"
     }
     
     func alert() {
+        defcon = 2
         shield.image = UIImage(named:"alert")
         status.text = "alert"
     }
@@ -55,20 +56,25 @@ class ViewController: UIViewController {
     }
     
     func updateState() {
-        if (!armed) {
-            if (lo.isNear() && vu.isNear()) {
-                arm()
-            }
-            return
-        }
-        
-        if (!vu.isNear()) {
-            if lo.isNear(){
-                disarm()
-            } else {
-                alert()
-            }
-            return
+        switch defcon {
+            case 0:
+                if (lo.isNear() && vu.isNear()) {
+                    arm()
+                }
+            case 1:
+                if (!vu.isNear()) {
+                    if lo.isNear() {
+                        disarm()
+                    } else {
+                        alert()
+                    }
+                }
+            case 2:
+                if (lo.isNear()) {
+                    disarm()
+                }
+        default:
+            print("Invalid DEFCON state.")
         }
     }
   
