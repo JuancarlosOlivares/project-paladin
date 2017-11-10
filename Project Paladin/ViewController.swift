@@ -18,6 +18,11 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var shield: UIImageView!
     @IBOutlet var status: UILabel!
+    @IBOutlet var loSlider: UISlider!
+    @IBOutlet var vuSlider: UISlider!
+    @IBOutlet weak var loLabel: UILabel!
+    @IBOutlet weak var vuLabel: UILabel!
+    @IBOutlet var sBinder: UISwitch!
     
     func disarm() {
         defcon = 0
@@ -38,24 +43,66 @@ class ViewController: UIViewController {
         createAlert(title: "ALERT", message: "You may have left your loved one in your vehicle!")
     }
     
-    @IBOutlet weak var loLabel: UILabel!
+    func setLo(val:Float) {
+        lo.dist = val
+        loSlider.setValue(val, animated: true)
+        loLabel.text = String(val)
+    }
+    
+    func setVu(val:Float) {
+        vu.dist = val
+        vuSlider.setValue(val, animated: true)
+        vuLabel.text = String(val)
+    }
+    
+    func moveLo(delta:Float) {
+        let newVal = lo.dist + delta
+        
+        switch newVal {
+        case _ where newVal < 0:
+            setLo(val:0)
+        case _ where newVal > 1:
+            setLo(val:1)
+        default:
+            setLo(val:newVal)
+        }
+    }
+    
+    func moveVu(delta:Float) {
+        let newVal = vu.dist + delta
+        
+        switch newVal {
+        case _ where newVal < 0:
+            setVu(val:0)
+        case _ where newVal > 1:
+            setVu(val:1)
+        default:
+            setVu(val:newVal)
+        }
+    }
     
     @IBAction func updateLoSlider(_ sender: UISlider) {
-        lo.dist = sender.value
-        loLabel.text = String(lo.dist)
+        let delta = sender.value - lo.dist
+        setLo(val:sender.value)
+        
+        if(sBinder.isOn) {
+            moveVu(delta: delta)
+        }
         
         updateState()
     }
-    
-    @IBOutlet weak var vuLabel: UILabel!
     
     @IBAction func updateVuSlider(_ sender: UISlider) {
-        vu.dist = sender.value
-        vuLabel.text = String(vu.dist)
+        let delta = sender.value - vu.dist
+        setVu(val:sender.value)
+        
+        if(sBinder.isOn) {
+            moveLo(delta: delta)
+        }
         
         updateState()
     }
-    
+
     func updateState() {
         switch defcon {
             case 0:
@@ -88,10 +135,11 @@ class ViewController: UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
         updateState()
     }
 
