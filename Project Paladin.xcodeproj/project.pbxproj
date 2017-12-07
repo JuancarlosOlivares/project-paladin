@@ -7,15 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		22636F011FD34D5B00917BF9 /* PeripheralTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22636F001FD34D5B00917BF9 /* PeripheralTableViewController.swift */; };
 		6A0616C01FA006D800415A39 /* Sensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A0616BF1FA006D800415A39 /* Sensor.swift */; };
 		6A74D68F1F843F23006A8F09 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74D68E1F843F23006A8F09 /* AppDelegate.swift */; };
 		6A74D6911F843F23006A8F09 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A74D6901F843F23006A8F09 /* ViewController.swift */; };
 		6A74D6941F843F23006A8F09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6921F843F23006A8F09 /* Main.storyboard */; };
 		6A74D6961F843F23006A8F09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6951F843F23006A8F09 /* Assets.xcassets */; };
 		6A74D6991F843F23006A8F09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */; };
+		6AD50A571FD37219000A44DD /* BlePeripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD50A561FD37219000A44DD /* BlePeripheral.swift */; };
+		6AD50A5A1FD372D9000A44DD /* BlePeripheralDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD50A591FD372D9000A44DD /* BlePeripheralDelegate.swift */; };
+		6AD50A5E1FD37384000A44DD /* PeripheralTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD50A5D1FD37384000A44DD /* PeripheralTableViewCell.swift */; };
+		6AD50A611FD37409000A44DD /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD50A601FD37409000A44DD /* PeripheralViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		22636F001FD34D5B00917BF9 /* PeripheralTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewController.swift; sourceTree = "<group>"; };
 		6A0616BF1FA006D800415A39 /* Sensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sensor.swift; sourceTree = "<group>"; };
 		6A74D68B1F843F23006A8F09 /* Project Paladin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Project Paladin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A74D68E1F843F23006A8F09 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +30,10 @@
 		6A74D6951F843F23006A8F09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6A74D6981F843F23006A8F09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6A74D69A1F843F23006A8F09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AD50A561FD37219000A44DD /* BlePeripheral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlePeripheral.swift; sourceTree = "<group>"; };
+		6AD50A591FD372D9000A44DD /* BlePeripheralDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlePeripheralDelegate.swift; sourceTree = "<group>"; };
+		6AD50A5D1FD37384000A44DD /* PeripheralTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralTableViewCell.swift; sourceTree = "<group>"; };
+		6AD50A601FD37409000A44DD /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +66,60 @@
 		6A74D68D1F843F23006A8F09 /* Project Paladin */ = {
 			isa = PBXGroup;
 			children = (
-				6A74D68E1F843F23006A8F09 /* AppDelegate.swift */,
-				6A74D6901F843F23006A8F09 /* ViewController.swift */,
 				6A74D6951F843F23006A8F09 /* Assets.xcassets */,
-				6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */,
-				6A74D6921F843F23006A8F09 /* Main.storyboard */,
 				6A74D69A1F843F23006A8F09 /* Info.plist */,
+				6AD50A5B1FD3730A000A44DD /* UI */,
+				6AD50A581FD37271000A44DD /* Delegates */,
+				6AD50A551FD371E6000A44DD /* Models */,
+				6A74D6901F843F23006A8F09 /* ViewController.swift */,
 				6A0616BF1FA006D800415A39 /* Sensor.swift */,
 			);
 			path = "Project Paladin";
+			sourceTree = "<group>";
+		};
+		6AD50A551FD371E6000A44DD /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6AD50A561FD37219000A44DD /* BlePeripheral.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6AD50A581FD37271000A44DD /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				6A74D68E1F843F23006A8F09 /* AppDelegate.swift */,
+				6AD50A591FD372D9000A44DD /* BlePeripheralDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
+		6AD50A5B1FD3730A000A44DD /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6AD50A5F1FD3739B000A44DD /* Controllers */,
+				6AD50A5C1FD37333000A44DD /* Views */,
+				6A74D6971F843F23006A8F09 /* LaunchScreen.storyboard */,
+				6A74D6921F843F23006A8F09 /* Main.storyboard */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		6AD50A5C1FD37333000A44DD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6AD50A5D1FD37384000A44DD /* PeripheralTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6AD50A5F1FD3739B000A44DD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				22636F001FD34D5B00917BF9 /* PeripheralTableViewController.swift */,
+				6AD50A601FD37409000A44DD /* PeripheralViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,7 +194,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AD50A5A1FD372D9000A44DD /* BlePeripheralDelegate.swift in Sources */,
 				6A74D6911F843F23006A8F09 /* ViewController.swift in Sources */,
+				6AD50A5E1FD37384000A44DD /* PeripheralTableViewCell.swift in Sources */,
+				22636F011FD34D5B00917BF9 /* PeripheralTableViewController.swift in Sources */,
+				6AD50A611FD37409000A44DD /* PeripheralViewController.swift in Sources */,
+				6AD50A571FD37219000A44DD /* BlePeripheral.swift in Sources */,
 				6A0616C01FA006D800415A39 /* Sensor.swift in Sources */,
 				6A74D68F1F843F23006A8F09 /* AppDelegate.swift in Sources */,
 			);
@@ -279,8 +339,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 78FPEGDH48;
 				INFOPLIST_FILE = "Project Paladin/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OliveTreeEnt.Project-Paladin";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -294,8 +355,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 78FPEGDH48;
 				INFOPLIST_FILE = "Project Paladin/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "OliveTreeEnt.Project-Paladin";
 				PRODUCT_NAME = "$(TARGET_NAME)";

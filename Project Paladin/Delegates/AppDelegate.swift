@@ -1,11 +1,8 @@
-//
-//  AppDelegate.swift
-//  Project Paladin
-//
-//  Created by Juancarlos Olivares on 10/3/17.
-//  Copyright © 2017 Olive Tree Ent. All rights reserved.
-//
-
+/*
+ Bluetooth connectivity and functionality was informed by following BluetoothLowEnergyIniOSSwift, located at https://github.com/BluetoothLowEnergyIniOSSwift.
+ 
+ Some code from Chapter07, located at https://github.com/BluetoothLowEnergyIniOSSwift/Chapter07 was adapted to fit our purposes.
+ */
 import UIKit
 import CoreBluetooth
 

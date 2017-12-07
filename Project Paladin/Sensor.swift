@@ -1,28 +1,25 @@
-//
-//  Sensor.swift
-//  Project Paladin
-//
-//  Created by Juancarlos Olivares on 10/24/17.
-//  Copyright © 2017 Olive Tree Ent. All rights reserved.
-//
-
+/*
+ Bluetooth connectivity and functionality was informed by following BluetoothLowEnergyIniOSSwift, located at https://github.com/BluetoothLowEnergyIniOSSwift.
+ 
+ Some code from Chapter07, located at https://github.com/BluetoothLowEnergyIniOSSwift/Chapter07 was adapted to fit our purposes.
+ */
 import Foundation
 
 class Sensor {
-    var thresh:Float
-    var dist:Float
+    var thresh:Int
+    var dist:Int
     
     init() {
         dist = 0
-        thresh = 0.5
+        thresh = -100
     }
     
-    init(thresh:Float) {
+    init(thresh:Int) {
         dist = 0
         self.thresh = thresh
     }
     
     func isNear() -> Bool{
-        return dist <= thresh
+        return dist >= thresh
     }
 }

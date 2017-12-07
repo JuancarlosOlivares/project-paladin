@@ -1,20 +1,23 @@
-//
-//  ViewController.swift
-//  uiDesign
-//
-//  Created by Lili on 11/7/17.
-//  Copyright © 2017 Lili. All rights reserved.
-//
-
+/*
+ Bluetooth connectivity and functionality was informed by following BluetoothLowEnergyIniOSSwift, located at https://github.com/BluetoothLowEnergyIniOSSwift.
+ 
+ Some code from Chapter07, located at https://github.com/BluetoothLowEnergyIniOSSwift/Chapter07 was adapted to fit our purposes.
+ */
 import UIKit
+import CoreBluetooth
 
-class ViewController: UIViewController {
-    static let VU_THRESH:Float = 0.5
-    static let LO_THRESH:Float = 0.4
+class ViewController: UIViewController, CBCentralManagerDelegate, BlePeripheralDelegate {
+    
+    static let VU_THRESH:Int = -70
+    static let LO_THRESH:Int = -60
     
     var vu:Sensor = Sensor(thresh:VU_THRESH)
     var lo:Sensor = Sensor(thresh:LO_THRESH)
     var defcon:Int = 0
+    
+    var connectedService:CBService!
+    
+    var connectedCharacteristic:CBCharacteristic!
     
     @IBOutlet weak var shield: UIImageView!
     @IBOutlet var status: UILabel!
@@ -23,6 +26,46 @@ class ViewController: UIViewController {
     @IBOutlet weak var loLabel: UILabel!
     @IBOutlet weak var vuLabel: UILabel!
     @IBOutlet var sBinder: UISwitch!
+    
+    var pollTimer: Timer!
+    
+    var centralManager:CBCentralManager!
+    
+    var vuPeriph:BlePeripheral!
+    var loPeriph:BlePeripheral!
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        print("Central Manager updated: checking state")
+        
+        switch (central.state) {
+        case .poweredOn:
+            print("bluetooth on")
+        default:
+            print("bluetooth unavailable")
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral, didConnect periph2: CBPeripheral) {
+        print("Connected Peripheral: \(String(describing: peripheral.name))")
+        
+        if(peripheral == vuPeriph) {
+            vuPeriph.connected(peripheral: peripheral)
+        } else if(peripheral == loPeriph) {
+            loPeriph.connected(peripheral: peripheral)
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("failed to connect")
+        print(error.debugDescription)
+        
+    }
+   
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        print("Disconnected Peripheral: \(String(describing: peripheral.name))")
+        centralManager.connect(peripheral)
+        //dismiss(animated: true, completion: nil)
+    }
     
     func disarm() {
         defcon = 0
@@ -43,19 +86,27 @@ class ViewController: UIViewController {
         createAlert(title: "ALERT", message: "You may have left your loved one in your vehicle!")
     }
     
-    func setLo(val:Float) {
+    func setLo(val:Int) {
         lo.dist = val
-        loSlider.setValue(val, animated: true)
+        loSlider.setValue(Float(val), animated: true)
         loLabel.text = String(val)
     }
     
-    func setVu(val:Float) {
+    func setVu(val:Int) {
         vu.dist = val
-        vuSlider.setValue(val, animated: true)
+        vuSlider.setValue(Float(val), animated: true)
         vuLabel.text = String(val)
     }
     
-    func moveLo(delta:Float) {
+    func setVuPeripheral(peripheral: BlePeripheral){
+        vuPeriph = peripheral
+    }
+    
+    func setLoPeripheral(peripheral: BlePeripheral){
+        loPeriph = peripheral
+    }
+    
+    /*func moveLo(delta:Int) {
         let newVal = lo.dist + delta
         
         switch newVal {
@@ -68,7 +119,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func moveVu(delta:Float) {
+    func moveVu(delta:Int) {
         let newVal = vu.dist + delta
         
         switch newVal {
@@ -79,28 +130,28 @@ class ViewController: UIViewController {
         default:
             setVu(val:newVal)
         }
-    }
+    }*/
     
     @IBAction func updateLoSlider(_ sender: UISlider) {
-        let delta = sender.value - lo.dist
+        /*let delta = sender.value - lo.dist
         setLo(val:sender.value)
         
         if(sBinder.isOn) {
             moveVu(delta: delta)
         }
         
-        updateState()
+        updateState()*/
     }
     
     @IBAction func updateVuSlider(_ sender: UISlider) {
-        let delta = sender.value - vu.dist
+        /*let delta = sender.value - vu.dist
         setVu(val:sender.value)
         
         if(sBinder.isOn) {
             moveLo(delta: delta)
         }
         
-        updateState()
+        updateState()*/
     }
 
     func updateState() {
@@ -138,7 +189,25 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        vuPeriph.delegate = self
+        loPeriph.delegate = self
+        centralManager.delegate = self
+        centralManager.connect(vuPeriph.peripheral)
+        centralManager.connect(loPeriph.peripheral)
+        
+        print("VU PERIPHERAL: " + vuPeriph.advertisedName + "\nLO PERIPHERAL: " + loPeriph.advertisedName)
+        pollTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ViewController.pollForData), userInfo: nil, repeats: true)
+    }
+    
+    @objc func pollForData(){
+        //print("TIMER FIRED")
+        
+        vuPeriph.peripheral.readRSSI()
+        loPeriph.peripheral.readRSSI()
+        
+        setVu(val: vuPeriph.rssi.intValue)
+        setLo(val: loPeriph.rssi.intValue)
         
         updateState()
     }
